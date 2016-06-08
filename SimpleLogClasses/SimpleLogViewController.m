@@ -1,20 +1,20 @@
 //
-//  SettingsLogViewController.m
+//  SimpleLogViewController.m
 //
 
-#import "SettingsLogViewController.h"
+#import "SimpleLogViewController.h"
 #import "SimpleLog.h"
 #import "LogEntryViewCell.h"
 #import <MessageUI/MessageUI.h>
 
-@interface SettingsLogViewController ()<MFMailComposeViewControllerDelegate>
+@interface SimpleLogViewController ()<MFMailComposeViewControllerDelegate>
 
 @property (nonatomic, strong) NSDateFormatter *timeFormatter;
 @property (nonatomic, strong) MFMailComposeViewController *picker;
 
 @end
 
-@implementation SettingsLogViewController
+@implementation SimpleLogViewController
 
 - (void)loadView
 {

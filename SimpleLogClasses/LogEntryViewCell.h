@@ -10,4 +10,8 @@
 
 @interface LogEntryViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *dateTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *methodLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textField;
+
 @end

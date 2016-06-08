@@ -10,7 +10,7 @@ typedef enum : NSUInteger {
     SettingsGenericLogMode = 2,
 } SettingsLogMode;
 
-@interface SettingsLogViewController : UITableViewController
+@interface SimpleLogViewController : UITableViewController
 @property (nonatomic, assign) SettingsLogMode mode;
 - (IBAction)sendEmail:(id)sender;
 @end
