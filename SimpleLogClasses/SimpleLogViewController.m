@@ -126,8 +126,9 @@
         }
         [self presentViewController:self.picker animated:YES completion:NULL];
     } else {
-        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"It's not possible to send an email" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [alert show];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error" message:@"Unable to send email" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alertController animated:YES completion:NULL];
     }
 
 }
@@ -158,7 +159,7 @@
     switch (result)
     {
         case MFMailComposeResultCancelled:
-            message = @"Sending canceled";
+            message = @"Sending cancelled";
             break;
         case MFMailComposeResultSaved:
             message = @"Email saved";
@@ -167,15 +168,18 @@
             message = @"Email send";
             break;
         case MFMailComposeResultFailed:
-            message = @"Email not send";
+            message = @"Email not sent";
             break;
         default:
-            message = @"Email not send";
+            message = @"Email not sent";
             break;
     }
-    [self.picker dismissViewControllerAnimated:YES completion:NULL];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Log" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-    [alert show];
+    __weak SimpleLogViewController *weakSelf = self;
+    [self.picker dismissViewControllerAnimated:YES completion:^{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Log" message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+        [weakSelf presentViewController:alertController animated:YES completion:NULL];
+    }];
 }
 
 
