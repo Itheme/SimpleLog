@@ -55,7 +55,7 @@
 {
     switch (self.mode) {
         case SettingsSyncLogMode:
-            return [SimpleErrorLog sharedErrorLog].syncRecordCount;
+            return [SimpleErrorLog sharedErrorLog].genericRecordCount;
         case SettingsPerformanceLogMode:
             return [SimpleErrorLog sharedErrorLog].performanceRecordCount;
         default:
@@ -87,7 +87,7 @@
                 entry = [log performanceEntryAtIndex:indexPath.row];
                 break;
             case SettingsSyncLogMode:
-                entry = [log syncEntryAtIndex:indexPath.row];
+                entry = [log genericEntryAtIndex:indexPath.row];
                 break;
             default:
                 entry = [log errorEntryAtIndex:indexPath.row];
@@ -111,7 +111,7 @@
                 [self.picker setMessageBody:[[SimpleErrorLog sharedErrorLog] getPerformanceMessage] isHTML:YES];
                 break;
             case SettingsSyncLogMode:
-                [self.picker setMessageBody:[[SimpleErrorLog sharedErrorLog] getSyncMessage] isHTML:YES];
+                [self.picker setMessageBody:[[SimpleErrorLog sharedErrorLog] getGenericMessage] isHTML:YES];
                 break;
             default:
                 [self.picker setMessageBody:[[SimpleErrorLog sharedErrorLog] getErrorsMessage] isHTML:YES];
@@ -131,7 +131,7 @@
             [[SimpleErrorLog sharedErrorLog] clearPerformance];
             break;
         case SettingsSyncLogMode:
-            [[SimpleErrorLog sharedErrorLog] clearSync];
+            [[SimpleErrorLog sharedErrorLog] clearGeneric];
             break;
         default:
             [[SimpleErrorLog sharedErrorLog] clearErrors];

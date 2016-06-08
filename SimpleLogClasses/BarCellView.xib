@@ -6,28 +6,23 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BarCell">
-            <connections>
-                <outlet property="barWidth" destination="a1P-2e-3Te" id="7l4-II-y60"/>
-                <outlet property="label" destination="EX8-gq-WsY" id="tGY-yC-Wga"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BarCell"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BarCell" id="Hfg-jr-dXo" customClass="BarCell">
-            <rect key="frame" x="0.0" y="0.0" width="564" height="30"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BarCell" rowHeight="30" id="Hfg-jr-dXo" customClass="BarCell">
+            <rect key="frame" x="0.0" y="0.0" width="370" height="30"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hfg-jr-dXo" id="KxT-oe-7MU">
-                <rect key="frame" x="0.0" y="0.0" width="564" height="29.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="370" height="29.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="greenFlatButt" translatesAutoresizingMaskIntoConstraints="NO" id="3Wp-fD-cGj">
-                        <rect key="frame" x="0.0" y="0.0" width="627" height="35"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenFlatButt" translatesAutoresizingMaskIntoConstraints="NO" id="3Wp-fD-cGj">
+                        <rect key="frame" x="8" y="4" width="300" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="627" id="a1P-2e-3Te"/>
+                            <constraint firstAttribute="width" constant="300" id="a1P-2e-3Te"/>
                         </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b5Q-mz-h9t">
-                        <rect key="frame" x="313" y="0.0" width="1" height="30"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5Q-mz-h9t">
+                        <rect key="frame" x="184" y="0.0" width="1" height="30"/>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="rPX-wL-QW3"/>
@@ -55,6 +50,11 @@
                     <constraint firstItem="EX8-gq-WsY" firstAttribute="leading" secondItem="KxT-oe-7MU" secondAttribute="leadingMargin" constant="8" id="uY8-kE-z0e"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="barWidth" destination="a1P-2e-3Te" id="CTg-g7-RjK"/>
+                <outlet property="label" destination="EX8-gq-WsY" id="Xvb-Xv-Z13"/>
+            </connections>
+            <point key="canvasLocation" x="199" y="292"/>
         </tableViewCell>
     </objects>
     <resources>

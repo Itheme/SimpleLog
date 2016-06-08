@@ -7,10 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-//#define SYNCLOGPROMPT_FNB @"\nF&B ·"
-//#define SYNCLOGPROMPT_BOOKER @"\nBooker ·"
-
-//static NSString *BOOKERUI_LogUpdated;
 
 @interface SimpleLogEntry : NSObject
 @property (nonatomic, readonly) NSDate *time;
@@ -25,8 +21,8 @@
 @property (nonatomic, strong) NSDateFormatter *timeFormatter;
 @property (nonatomic, readonly, getter = getPerformanceRecordCount) NSUInteger performanceRecordCount;
 @property (nonatomic, readonly, getter = getErrorRecordCount) NSUInteger errorRecordCount;
-@property (nonatomic, readonly, getter = getSyncRecordCount) NSUInteger syncRecordCount;
-@property (nonatomic, readonly, strong) NSMutableArray *performanceEntries; // access only in sync with error log
+@property (nonatomic, readonly, getter = getGenericRecordCount) NSUInteger genericRecordCount;
+@property (nonatomic, readonly, strong) NSMutableArray *performanceEntries;
 
 + (SimpleErrorLog *) sharedErrorLog;
 
@@ -34,16 +30,17 @@
 
 - (SimpleLogEntry *) performanceEntryAtIndex:(NSUInteger)index;
 - (SimpleLogEntry *) errorEntryAtIndex:(NSUInteger)index;
-- (SimpleLogEntry *) syncEntryAtIndex:(NSUInteger)index;
+- (SimpleLogEntry *) genericEntryAtIndex:(NSUInteger)index;
 
 - (NSString *)getErrorsMessage;
 - (NSString *)getPerformanceMessage;
-- (NSString *)getSyncMessage;
+- (NSString *)getGenericMessage;
 
 - (void) logError:(NSError *)error forMethod:(NSString *)method;
+- (void) logLatency:(NSDecimalNumber *)latency description:(NSString *)description size:(NSNumber *)size forMethod:(NSString *)method;
 
 - (void) clearPerformance;
-- (void) clearSync;
+- (void) clearGeneric;
 - (void) clearErrors;
 
 @end

@@ -1,9 +1,5 @@
 //
 //  SimpleLog.m
-//  NativeiOSBooker
-//
-//  Created by Danila Parhomenko on 3/26/14.
-//  Copyright (c) 2014 Booker Software. All rights reserved.
 //
 
 #import "SimpleLog.h"
@@ -13,10 +9,10 @@
 #import "NSString+HTMLStrings.h"
 #import "SimpleLogPrimitives.h"
 
-typedef NS_ENUM(NSUInteger, BookerErrorType) {
-    BookerErrorEntryType,
-    BookerErrorSyncType,
-    BookerErrorPerformanceType
+typedef NS_ENUM(NSUInteger, LogErrorType) {
+    LogErrorEntryType,
+    LogErrorGenericType,
+    LogErrorPerformanceType
 };
 
 @interface SimpleLogEntry ()
@@ -29,7 +25,7 @@ typedef NS_ENUM(NSUInteger, BookerErrorType) {
 
 @implementation SimpleLogEntry
 
-- (NSString *)convertBookerLogEntryToString
+- (NSString *)convertLogEntryToString
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
@@ -63,7 +59,7 @@ typedef NS_ENUM(NSUInteger, BookerErrorType) {
     }
 }
 
-+ (SimpleLogEntry *)bookerLogEntryFromString:(NSString *)content
++ (SimpleLogEntry *)logEntryFromString:(NSString *)content
 {
     
     NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
@@ -90,7 +86,7 @@ typedef NS_ENUM(NSUInteger, BookerErrorType) {
 
 @interface SimpleErrorLog ()
 @property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *errorEntries;
-@property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *syncEntries;
+@property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *genericEntries;
 @property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *performanceEntries;
 @end
 
@@ -102,7 +98,7 @@ SimpleErrorLog *singleton = nil;
     if (singleton == nil) {
         singleton = [[SimpleErrorLog alloc] init];
         singleton.errorEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
-        singleton.syncEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
+        singleton.genericEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
         singleton.performanceEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
         singleton.timeFormatter = [[NSDateFormatter alloc] init];
         [singleton.timeFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
@@ -112,17 +108,17 @@ SimpleErrorLog *singleton = nil;
 
 - (void)updateErrosList
 {
-    [self updateErrosListForType:BookerErrorEntryType withArray:self.errorEntries];
-    [self updateErrosListForType:BookerErrorSyncType withArray:self.syncEntries];
-    [self updateErrosListForType:BookerErrorPerformanceType withArray:self.performanceEntries];
+    [self updateErrosListForType:LogErrorEntryType withArray:self.errorEntries];
+    [self updateErrosListForType:LogErrorGenericType withArray:self.genericEntries];
+    [self updateErrosListForType:LogErrorPerformanceType withArray:self.performanceEntries];
 }
 
-- (void)updateErrosListForType:(BookerErrorType)type withArray:(NSMutableArray *)array
+- (void)updateErrosListForType:(LogErrorType)type withArray:(NSMutableArray *)array
 {
     [array removeAllObjects];
     NSArray *errorsList = [SimpleErrorLog downloadHistoryWithType:type];
     for (NSString *element in errorsList) {
-        SimpleLogEntry *entry = [SimpleLogEntry bookerLogEntryFromString:element];
+        SimpleLogEntry *entry = [SimpleLogEntry logEntryFromString:element];
         if (!entry) {
             continue;
         }
@@ -142,8 +138,8 @@ SimpleErrorLog *singleton = nil;
     return count;
 }
 
-- (NSUInteger)getSyncRecordCount {
-    NSUInteger count = self.syncEntries.count;
+- (NSUInteger)getGenericRecordCount {
+    NSUInteger count = self.genericEntries.count;
     return count;
 }
 
@@ -165,10 +161,10 @@ SimpleErrorLog *singleton = nil;
     return nil;
 }
 
-- (SimpleLogEntry *) syncEntryAtIndex:(NSUInteger)index {
-    if (index < self.syncEntries.count) {
+- (SimpleLogEntry *) genericEntryAtIndex:(NSUInteger)index {
+    if (index < self.genericEntries.count) {
         SimpleLogEntry *entry;
-        entry = self.syncEntries[index];
+        entry = self.genericEntries[index];
         return entry;
     }
     return nil;
@@ -176,22 +172,14 @@ SimpleErrorLog *singleton = nil;
 
 - (void) logError:(NSError *)error forMethod:(NSString *)method {
     NSDecimalNumber *latency = error.userInfo[@"Latency"];
-//    if ((latency == nil) && (error.code != BOOKERAPI_ERROR_CODE_SYNC_RECORD) && ![[error.localizedDescription lowercaseString] hasPrefix:@"you are not authorized to save this order"] && ![[error.localizedDescription lowercaseString] hasPrefix:@"no parsable response"]) {
-//#warning filter only customers cancellation errors, not all "no parsable response" ones
-//        [Answers logCustomEventWithName:method customAttributes:error.userInfo];
-//    }
     @synchronized (self) {
-        NSRange range = [method rangeOfString:@"json/BusinessService.svc"];
-        if (range.location != NSNotFound) {
-            method = [method substringFromIndex:range.location + range.length];
-        }
         SimpleLogEntry *entry = [[SimpleLogEntry alloc] init];
         entry.time = [NSDate date];
         entry.method = method;
         entry.error = error;
         entry.latency = latency;
         entry.responseSize = error.userInfo[@"Size"];
-        [SimpleErrorLog writeToHistoryFileBookerLogEntry:entry];
+        [SimpleErrorLog writeToHistoryFileLogEntry:entry];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:SimpleLogUpdatedNotification
@@ -201,6 +189,27 @@ SimpleErrorLog *singleton = nil;
     });
 }
 
+- (void) logLatency:(NSDecimalNumber *)latency description:(NSString *)description size:(NSNumber *)size forMethod:(NSString *)method
+{
+    @synchronized (self) {
+        SimpleLogEntry *entry = [[SimpleLogEntry alloc] init];
+        entry.time = [NSDate date];
+        entry.method = method;
+        entry.error = [NSError errorWithDomain:SIMPLELOG_ERROR_DOMAIN
+                                          code:SIMPLELOG_ERROR_CODE_PERFORMANCE_RECORD
+                                      userInfo:@{@"Latency": UNNIL(latency),
+                                                 @"Size": UNNIL(size)}];
+        entry.latency = latency;
+        entry.responseSize = size;
+        [SimpleErrorLog writeToHistoryFileLogEntry:entry];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SimpleLogUpdatedNotification
+                                                            object:nil
+                                                          userInfo:nil];
+        
+    });
+}
 
 - (NSString *)getPerformanceMessage
 {
@@ -259,10 +268,10 @@ SimpleErrorLog *singleton = nil;
     return [NSMutableString htmlTableWithParameters:nil contents:result];
 }
 
-- (NSString *)getSyncMessage
+- (NSString *)getGenericMessage
 {
     SimpleErrorLog *log = self;
-    NSInteger count = log.syncRecordCount;
+    NSInteger count = log.genericRecordCount;
     
     NSMutableString *result = [NSMutableString htmlTableRowWithParameters:nil contents:^NSString *(NSInteger column, NSMutableDictionary *cellParams) {
         switch (column) {
@@ -271,15 +280,15 @@ SimpleErrorLog *singleton = nil;
             case 1:
                 return @"Reason";
             case 2:
-                return @"F&B Order".htmlString;
+                return @"Data";
             case 3:
-                return @"Booker Order";
+                return @"Description";
             default:
                 return nil;
         }
     }];
     for (int i = 0; i < count; i++) {
-        SimpleLogEntry *entry = [log syncEntryAtIndex:i];
+        SimpleLogEntry *entry = [log genericEntryAtIndex:i];
         NSString *fullDescription = entry.error.localizedDescription;
         NSArray *components = [fullDescription componentsSeparatedByString:@"·"];
         [result appendString:[NSMutableString htmlTableRowWithParameters:nil contents:^NSString *(NSInteger column, NSMutableDictionary *cellParams) {
@@ -352,27 +361,27 @@ SimpleErrorLog *singleton = nil;
 - (void) clearPerformance
 {
     [self.performanceEntries removeAllObjects];
-    [self tryRemoveHistoryEntryType:BookerErrorPerformanceType];
+    [self tryRemoveHistoryEntryType:LogErrorPerformanceType];
 }
 
-- (void) clearSync
+- (void) clearGeneric
 {
-    [self.syncEntries removeAllObjects];
-    [self tryRemoveHistoryEntryType:BookerErrorSyncType];
+    [self.genericEntries removeAllObjects];
+    [self tryRemoveHistoryEntryType:LogErrorGenericType];
 }
 
 - (void) clearErrors
 {
     [self.errorEntries removeAllObjects];
-    [self tryRemoveHistoryEntryType:BookerErrorEntryType];
+    [self tryRemoveHistoryEntryType:LogErrorEntryType];
 }
 
 
 #pragma mark - I/O logic for erros saving at file
 
-+ (void)writeToHistoryFileBookerLogEntry:(SimpleLogEntry *)logEntry
++ (void)writeToHistoryFileLogEntry:(SimpleLogEntry *)logEntry
 {
-    BookerErrorType type = (logEntry.error.code == SIMPLELOG_ERROR_CODE_PERFORMANCE_RECORD) ? BookerErrorPerformanceType:((logEntry.error.code == SIMPLELOG_ERROR_CODE_SYNC_RECORD) ? BookerErrorSyncType : BookerErrorEntryType);
+    LogErrorType type = (logEntry.error.code == SIMPLELOG_ERROR_CODE_PERFORMANCE_RECORD) ? LogErrorPerformanceType:((logEntry.error.code == SIMPLELOG_ERROR_CODE_GENERIC_RECORD) ? LogErrorGenericType : LogErrorEntryType);
     
     NSString *fileName = [self pathForLogType:type];
     //create file if it doesn't exist
@@ -381,12 +390,12 @@ SimpleErrorLog *singleton = nil;
 
     NSFileHandle *file = [NSFileHandle fileHandleForUpdatingAtPath:fileName];
     [file seekToEndOfFile];
-    [file writeData:[[logEntry convertBookerLogEntryToString] dataUsingEncoding:NSUTF8StringEncoding]];
+    [file writeData:[[logEntry convertLogEntryToString] dataUsingEncoding:NSUTF8StringEncoding]];
     [file closeFile];
 }
 
 
-+ (NSArray *)downloadHistoryWithType:(BookerErrorType)type
++ (NSArray *)downloadHistoryWithType:(LogErrorType)type
 {
     NSString *fileName = [self pathForLogType:type];
     if(![[NSFileManager defaultManager] fileExistsAtPath:fileName])
@@ -405,13 +414,13 @@ SimpleErrorLog *singleton = nil;
     return array;
 }
 
-+ (NSString *)pathForLogType:(BookerErrorType)type
++ (NSString *)pathForLogType:(LogErrorType)type
 {
     switch (type) {
-        case BookerErrorPerformanceType:
+        case LogErrorPerformanceType:
             return [self pathForLogFile:@"_performance"];
-        case BookerErrorSyncType:
-            return [self pathForLogFile:@"_sync"];
+        case LogErrorGenericType:
+            return [self pathForLogFile:@"_generic"];
         default:
             return [self pathForLogFile:@"_entry"];
     }
@@ -435,12 +444,12 @@ SimpleErrorLog *singleton = nil;
         }
     }
     
-    NSString *fileName = [NSString stringWithFormat:@"%@%@.txt", [[UIDevice currentDevice] identifierForVendor], type];
+    NSString *fileName = [NSString stringWithFormat:@"%@%@.txt", [[UIDevice currentDevice] identifierForVendor].UUIDString, type];
     
     return [folder stringByAppendingPathComponent:fileName];
 }
 
-- (BOOL)tryRemoveHistoryEntryType:(BookerErrorType)type
+- (BOOL)tryRemoveHistoryEntryType:(LogErrorType)type
 {
     
     NSString *fileName = [[self class] pathForLogType:type];

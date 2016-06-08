@@ -16,11 +16,3 @@
 @end
 
 
-@interface BarCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *barWidth;
-@property (weak, nonatomic) IBOutlet UILabel *label;
-
-@end
-
-

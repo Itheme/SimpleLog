@@ -3,6 +3,7 @@
 //
 
 #import "HistogramViewController.h"
+#import "BarCell.h"
 #import "SimpleLog.h"
 
 @interface StatsRecord : NSObject
@@ -268,10 +269,6 @@
     });
 }
      
-@end
-
-@implementation BarCell
-
 @end
 
 @implementation StatsRecord

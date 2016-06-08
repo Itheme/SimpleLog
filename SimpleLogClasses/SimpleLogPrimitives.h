@@ -14,6 +14,6 @@
 static NSString *SimpleLogUpdatedNotification = @"SimpleLogUpdatedNotification";
 
 #define SIMPLELOG_ERROR_CODE_PERFORMANCE_RECORD -266537017
-#define SIMPLELOG_ERROR_CODE_SYNC_RECORD -266537018
-
+#define SIMPLELOG_ERROR_CODE_GENERIC_RECORD -266537018
+#define SIMPLELOG_ERROR_DOMAIN @"SimpleLogDomain"
 #endif /* SimpleLogPrimitives_h */
