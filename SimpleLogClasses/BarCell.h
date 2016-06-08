@@ -10,6 +10,7 @@
 
 @interface BarCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *barImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *barWidth;
 @property (weak, nonatomic) IBOutlet UILabel *label;
 

@@ -51,6 +51,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="barImageView" destination="3Wp-fD-cGj" id="8TA-Cg-EMK"/>
                 <outlet property="barWidth" destination="a1P-2e-3Te" id="CTg-g7-RjK"/>
                 <outlet property="label" destination="EX8-gq-WsY" id="Xvb-Xv-Z13"/>
             </connections>

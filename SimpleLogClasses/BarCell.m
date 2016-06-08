@@ -12,7 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+    if (UIEdgeInsetsEqualToEdgeInsets(self.barImageView.image.capInsets, UIEdgeInsetsZero)) {
+        self.barImageView.image = [self.barImageView.image resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
