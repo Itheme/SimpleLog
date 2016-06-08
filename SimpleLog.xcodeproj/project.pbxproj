@@ -20,13 +20,13 @@
 		38539C951D0855CC003B287E /* NSString+HTMLStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C941D0855CC003B287E /* NSString+HTMLStrings.m */; };
 		38539C981D085964003B287E /* SimpleLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C971D085964003B287E /* SimpleLogViewController.m */; };
 		38539C9B1D085A94003B287E /* HistogramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C9A1D085A94003B287E /* HistogramViewController.m */; };
-		38539CA11D085C4F003B287E /* BarCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CA01D085C4F003B287E /* BarCellView.xib */; };
-		38539CA31D085DB9003B287E /* greenFlatButt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38539CA21D085DB9003B287E /* greenFlatButt@2x.png */; };
-		38539CA51D0863A4003B287E /* HistogramView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CA41D0863A4003B287E /* HistogramView.xib */; };
 		38539CA81D086BCE003B287E /* BarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539CA71D086BCE003B287E /* BarCell.m */; };
 		38539CAB1D087022003B287E /* LogEntryViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539CAA1D087022003B287E /* LogEntryViewCell.m */; };
-		38539CAD1D087087003B287E /* LogEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CAC1D087087003B287E /* LogEntry.xib */; };
-		38539CAF1D08711F003B287E /* EmptyLogEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CAE1D08711F003B287E /* EmptyLogEntry.xib */; };
+		38539CB61D0875D0003B287E /* BarCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB11D0875D0003B287E /* BarCellView.xib */; };
+		38539CB71D0875D0003B287E /* EmptyLogEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB21D0875D0003B287E /* EmptyLogEntry.xib */; };
+		38539CB81D0875D0003B287E /* greenLogBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB31D0875D0003B287E /* greenLogBarBackground@2x.png */; };
+		38539CB91D0875D0003B287E /* HistogramView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB41D0875D0003B287E /* HistogramView.xib */; };
+		38539CBA1D0875D0003B287E /* LogEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB51D0875D0003B287E /* LogEntry.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,15 +74,15 @@
 		38539C971D085964003B287E /* SimpleLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleLogViewController.m; sourceTree = "<group>"; };
 		38539C991D085A94003B287E /* HistogramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistogramViewController.h; sourceTree = "<group>"; };
 		38539C9A1D085A94003B287E /* HistogramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistogramViewController.m; sourceTree = "<group>"; };
-		38539CA01D085C4F003B287E /* BarCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarCellView.xib; sourceTree = "<group>"; };
-		38539CA21D085DB9003B287E /* greenFlatButt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenFlatButt@2x.png"; sourceTree = "<group>"; };
-		38539CA41D0863A4003B287E /* HistogramView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistogramView.xib; sourceTree = "<group>"; };
 		38539CA61D086BCE003B287E /* BarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarCell.h; sourceTree = "<group>"; };
 		38539CA71D086BCE003B287E /* BarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarCell.m; sourceTree = "<group>"; };
 		38539CA91D087022003B287E /* LogEntryViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogEntryViewCell.h; sourceTree = "<group>"; };
 		38539CAA1D087022003B287E /* LogEntryViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogEntryViewCell.m; sourceTree = "<group>"; };
-		38539CAC1D087087003B287E /* LogEntry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogEntry.xib; sourceTree = "<group>"; };
-		38539CAE1D08711F003B287E /* EmptyLogEntry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyLogEntry.xib; sourceTree = "<group>"; };
+		38539CB11D0875D0003B287E /* BarCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BarCellView.xib; sourceTree = "<group>"; };
+		38539CB21D0875D0003B287E /* EmptyLogEntry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyLogEntry.xib; sourceTree = "<group>"; };
+		38539CB31D0875D0003B287E /* greenLogBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenLogBarBackground@2x.png"; sourceTree = "<group>"; };
+		38539CB41D0875D0003B287E /* HistogramView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistogramView.xib; sourceTree = "<group>"; };
+		38539CB51D0875D0003B287E /* LogEntry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogEntry.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +113,7 @@
 		38539C4C1D08526C003B287E = {
 			isa = PBXGroup;
 			children = (
+				38539CB01D0875D0003B287E /* Resources */,
 				38539C8B1D0852CE003B287E /* SimpleLogClasses */,
 				38539C571D08526D003B287E /* SimpleLog */,
 				38539C711D08526D003B287E /* SimpleLogTests */,
@@ -191,13 +192,20 @@
 				38539C971D085964003B287E /* SimpleLogViewController.m */,
 				38539C991D085A94003B287E /* HistogramViewController.h */,
 				38539C9A1D085A94003B287E /* HistogramViewController.m */,
-				38539CA21D085DB9003B287E /* greenFlatButt@2x.png */,
-				38539CAC1D087087003B287E /* LogEntry.xib */,
-				38539CAE1D08711F003B287E /* EmptyLogEntry.xib */,
-				38539CA41D0863A4003B287E /* HistogramView.xib */,
-				38539CA01D085C4F003B287E /* BarCellView.xib */,
 			);
 			path = SimpleLogClasses;
+			sourceTree = "<group>";
+		};
+		38539CB01D0875D0003B287E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				38539CB11D0875D0003B287E /* BarCellView.xib */,
+				38539CB21D0875D0003B287E /* EmptyLogEntry.xib */,
+				38539CB31D0875D0003B287E /* greenLogBarBackground@2x.png */,
+				38539CB41D0875D0003B287E /* HistogramView.xib */,
+				38539CB51D0875D0003B287E /* LogEntry.xib */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,14 +311,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				38539CA31D085DB9003B287E /* greenFlatButt@2x.png in Resources */,
-				38539CA11D085C4F003B287E /* BarCellView.xib in Resources */,
+				38539CBA1D0875D0003B287E /* LogEntry.xib in Resources */,
+				38539CB81D0875D0003B287E /* greenLogBarBackground@2x.png in Resources */,
+				38539CB71D0875D0003B287E /* EmptyLogEntry.xib in Resources */,
+				38539CB61D0875D0003B287E /* BarCellView.xib in Resources */,
 				38539C681D08526D003B287E /* LaunchScreen.storyboard in Resources */,
-				38539CA51D0863A4003B287E /* HistogramView.xib in Resources */,
 				38539C651D08526D003B287E /* Assets.xcassets in Resources */,
-				38539CAF1D08711F003B287E /* EmptyLogEntry.xib in Resources */,
 				38539C631D08526D003B287E /* Main.storyboard in Resources */,
-				38539CAD1D087087003B287E /* LogEntry.xib in Resources */,
+				38539CB91D0875D0003B287E /* HistogramView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

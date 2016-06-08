@@ -13,7 +13,8 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     if (UIEdgeInsetsEqualToEdgeInsets(self.barImageView.image.capInsets, UIEdgeInsetsZero)) {
-        self.barImageView.image = [self.barImageView.image resizableImageWithCapInsets:UIEdgeInsetsMake(0, 4, 0, 4)];
+        self.barImageView.image = [self.barImageView.image resizableImageWithCapInsets:UIEdgeInsetsMake(4, 4, 4, 4)
+                                                                          resizingMode:UIImageResizingModeStretch];
     }
 }
 
