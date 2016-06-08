@@ -16,6 +16,12 @@
 @property (nonatomic, readonly) NSNumber *responseSize;
 @end
 
+@interface LogCategory : NSObject
+
+- (void) logMessage:(NSString *)message description:(NSString *)description forMethod:(NSString *)method;
+
+@end
+
 @interface SimpleErrorLog : NSObject
 
 @property (nonatomic, strong) NSDateFormatter *timeFormatter;
@@ -25,6 +31,8 @@
 @property (nonatomic, readonly, strong) NSMutableArray *performanceEntries;
 
 + (SimpleErrorLog *) sharedErrorLog;
+
+- (LogCategory *)categoryWithReason:(NSString *)reason;
 
 - (void)updateErrosList;
 
@@ -38,6 +46,7 @@
 
 - (void) logError:(NSError *)error forMethod:(NSString *)method;
 - (void) logLatency:(NSDecimalNumber *)latency description:(NSString *)description size:(NSNumber *)size forMethod:(NSString *)method;
+- (void) logReason:(NSString *)reason message:(NSString *)message description:(NSString *)description forMethod:(NSString *)method;
 
 - (void) clearPerformance;
 - (void) clearGeneric;

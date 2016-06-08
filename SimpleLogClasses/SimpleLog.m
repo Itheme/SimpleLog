@@ -23,6 +23,10 @@ typedef NS_ENUM(NSUInteger, LogErrorType) {
 @property (nonatomic) NSNumber *responseSize;
 @end
 
+@interface LogCategory ()
+@property (nonatomic, strong) NSString *reason;
+@end
+
 @implementation SimpleLogEntry
 
 - (NSString *)convertLogEntryToString
@@ -88,6 +92,8 @@ typedef NS_ENUM(NSUInteger, LogErrorType) {
 @property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *errorEntries;
 @property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *genericEntries;
 @property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *performanceEntries;
+
+@property (nonatomic, strong) NSMutableDictionary <NSString *, LogCategory *> *categories;
 @end
 
 @implementation SimpleErrorLog
@@ -100,10 +106,26 @@ SimpleErrorLog *singleton = nil;
         singleton.errorEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
         singleton.genericEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
         singleton.performanceEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
+        singleton.categories = [NSMutableDictionary dictionary];
         singleton.timeFormatter = [[NSDateFormatter alloc] init];
         [singleton.timeFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
     }
     return singleton;
+}
+
+- (LogCategory *)categoryWithReason:(NSString *)reason
+{
+    if (reason == nil) return [self categoryWithReason:@""];
+    LogCategory *result = nil;
+    @synchronized (self) {
+        result = self.categories[reason];
+        if (result == nil) {
+            result = [[LogCategory alloc] init];
+            result.reason = reason;
+            self.categories[reason] = result;
+        }
+    }
+    return result;
 }
 
 - (void)updateErrosList
@@ -198,9 +220,35 @@ SimpleErrorLog *singleton = nil;
         entry.error = [NSError errorWithDomain:SIMPLELOG_ERROR_DOMAIN
                                           code:SIMPLELOG_ERROR_CODE_PERFORMANCE_RECORD
                                       userInfo:@{@"Latency": UNNIL(latency),
-                                                 @"Size": UNNIL(size)}];
+                                                 @"Size": UNNIL(size),
+                                                 NSLocalizedDescriptionKey: description}];
         entry.latency = latency;
         entry.responseSize = size;
+        [SimpleErrorLog writeToHistoryFileLogEntry:entry];
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:SimpleLogUpdatedNotification
+                                                            object:nil
+                                                          userInfo:nil];
+        
+    });
+}
+
+- (void) logReason:(NSString *)reason message:(NSString *)message description:(NSString *)description forMethod:(NSString *)method
+{
+    if ((reason == nil) || (message == nil) || (description == nil)) {
+        [self logReason:reason?reason:@""
+                message:message?message:@""
+            description:description?description:@""
+              forMethod:method];
+    }
+    @synchronized (self) {
+        SimpleLogEntry *entry = [[SimpleLogEntry alloc] init];
+        entry.time = [NSDate date];
+        entry.method = method;
+        entry.error = [NSError errorWithDomain:SIMPLELOG_ERROR_DOMAIN
+                                          code:SIMPLELOG_ERROR_CODE_GENERIC_RECORD
+                                      userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"%@·%@·%@", reason, message, description]}];
         [SimpleErrorLog writeToHistoryFileLogEntry:entry];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -467,6 +515,18 @@ SimpleErrorLog *singleton = nil;
     return YES;
 }
 
+
+@end
+
+@implementation LogCategory
+
+- (void) logMessage:(NSString *)message description:(NSString *)description forMethod:(NSString *)method
+{
+    [[SimpleErrorLog sharedErrorLog] logReason:self.reason
+                                       message:message
+                                   description:description
+                                     forMethod:method];
+}
 
 @end
 
