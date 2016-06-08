@@ -10,9 +10,9 @@
 //#define SYNCLOGPROMPT_FNB @"\nF&B ·"
 //#define SYNCLOGPROMPT_BOOKER @"\nBooker ·"
 
-static NSString *BOOKERUI_LogUpdated;
+//static NSString *BOOKERUI_LogUpdated;
 
-@interface BookerLogEntry : NSObject
+@interface SimpleLogEntry : NSObject
 @property (nonatomic, readonly) NSDate *time;
 @property (nonatomic, readonly) NSString *method;
 @property (nonatomic, readonly) NSError *error;
@@ -20,20 +20,21 @@ static NSString *BOOKERUI_LogUpdated;
 @property (nonatomic, readonly) NSNumber *responseSize;
 @end
 
-@interface BookerErrorLog : NSObject
+@interface SimpleErrorLog : NSObject
 
+@property (nonatomic, strong) NSDateFormatter *timeFormatter;
 @property (nonatomic, readonly, getter = getPerformanceRecordCount) NSUInteger performanceRecordCount;
 @property (nonatomic, readonly, getter = getErrorRecordCount) NSUInteger errorRecordCount;
 @property (nonatomic, readonly, getter = getSyncRecordCount) NSUInteger syncRecordCount;
 @property (nonatomic, readonly, strong) NSMutableArray *performanceEntries; // access only in sync with error log
 
-+ (BookerErrorLog *) sharedErrorLog;
++ (SimpleErrorLog *) sharedErrorLog;
 
 - (void)updateErrosList;
 
-- (BookerLogEntry *) performanceEntryAtIndex:(NSUInteger)index;
-- (BookerLogEntry *) errorEntryAtIndex:(NSUInteger)index;
-- (BookerLogEntry *) syncEntryAtIndex:(NSUInteger)index;
+- (SimpleLogEntry *) performanceEntryAtIndex:(NSUInteger)index;
+- (SimpleLogEntry *) errorEntryAtIndex:(NSUInteger)index;
+- (SimpleLogEntry *) syncEntryAtIndex:(NSUInteger)index;
 
 - (NSString *)getErrorsMessage;
 - (NSString *)getPerformanceMessage;

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BarCell">
+            <connections>
+                <outlet property="barWidth" destination="a1P-2e-3Te" id="7l4-II-y60"/>
+                <outlet property="label" destination="EX8-gq-WsY" id="tGY-yC-Wga"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BarCell" id="Hfg-jr-dXo" customClass="BarCell">
+            <rect key="frame" x="0.0" y="0.0" width="564" height="30"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hfg-jr-dXo" id="KxT-oe-7MU">
+                <rect key="frame" x="0.0" y="0.0" width="564" height="29.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="greenFlatButt" translatesAutoresizingMaskIntoConstraints="NO" id="3Wp-fD-cGj">
+                        <rect key="frame" x="0.0" y="0.0" width="627" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="627" id="a1P-2e-3Te"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b5Q-mz-h9t">
+                        <rect key="frame" x="313" y="0.0" width="1" height="30"/>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="1" id="rPX-wL-QW3"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EX8-gq-WsY">
+                        <rect key="frame" x="16" y="4" width="356" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="356" id="0eG-62-Cor"/>
+                            <constraint firstAttribute="height" constant="21" id="dlr-IA-9lG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="centerY" secondItem="EX8-gq-WsY" secondAttribute="centerY" id="Foj-kL-AvI"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="3Wp-fD-cGj" secondAttribute="bottom" constant="-4" id="LRS-0F-lor"/>
+                    <constraint firstItem="3Wp-fD-cGj" firstAttribute="top" secondItem="KxT-oe-7MU" secondAttribute="topMargin" constant="-4" id="XuK-mv-7Tw"/>
+                    <constraint firstItem="3Wp-fD-cGj" firstAttribute="leading" secondItem="KxT-oe-7MU" secondAttribute="leadingMargin" id="akc-KB-3Iw"/>
+                    <constraint firstItem="b5Q-mz-h9t" firstAttribute="top" secondItem="KxT-oe-7MU" secondAttribute="topMargin" constant="-8" id="gMX-nz-Wbk"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="b5Q-mz-h9t" secondAttribute="bottom" constant="-8" id="mY4-rO-GCI"/>
+                    <constraint firstAttribute="centerX" secondItem="b5Q-mz-h9t" secondAttribute="centerX" id="tKi-0u-Xll"/>
+                    <constraint firstItem="EX8-gq-WsY" firstAttribute="leading" secondItem="KxT-oe-7MU" secondAttribute="leadingMargin" constant="8" id="uY8-kE-z0e"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="greenFlatButt" width="8" height="8"/>
+    </resources>
+</document>

@@ -1,18 +1,17 @@
 //
-//  BookerErrorLog.m
+//  SimpleLog.m
 //  NativeiOSBooker
 //
 //  Created by Danila Parhomenko on 3/26/14.
 //  Copyright (c) 2014 Booker Software. All rights reserved.
 //
 
-#import "BookerErrorLog.h"
-#import "NSString+InternalError.h"
+#import "SimpleLog.h"
+#import <UIKit/UIKit.h>
+//#import "NSString+InternalError.h"
 #import "NSMutableString+HTMLGeneration.h"
 #import "NSString+HTMLStrings.h"
-//#import <Crashlytics/Answers.h>
-
-#define LogCapacity 400
+#import "SimpleLogPrimitives.h"
 
 typedef NS_ENUM(NSUInteger, BookerErrorType) {
     BookerErrorEntryType,
@@ -20,7 +19,7 @@ typedef NS_ENUM(NSUInteger, BookerErrorType) {
     BookerErrorPerformanceType
 };
 
-@interface BookerLogEntry ()
+@interface SimpleLogEntry ()
 @property (nonatomic) NSDate *time;
 @property (nonatomic) NSString *method;
 @property (nonatomic) NSError *error;
@@ -28,7 +27,7 @@ typedef NS_ENUM(NSUInteger, BookerErrorType) {
 @property (nonatomic) NSNumber *responseSize;
 @end
 
-@implementation BookerLogEntry
+@implementation SimpleLogEntry
 
 - (NSString *)convertBookerLogEntryToString
 {
@@ -64,7 +63,7 @@ typedef NS_ENUM(NSUInteger, BookerErrorType) {
     }
 }
 
-+ (BookerLogEntry *)bookerLogEntryFromString:(NSString *)content
++ (SimpleLogEntry *)bookerLogEntryFromString:(NSString *)content
 {
     
     NSData *data = [content dataUsingEncoding:NSUTF8StringEncoding];
@@ -72,7 +71,7 @@ typedef NS_ENUM(NSUInteger, BookerErrorType) {
     if (!json.allKeys) {
         return nil;
     }
-    BookerLogEntry *entry = [[BookerLogEntry alloc] init];
+    SimpleLogEntry *entry = [[SimpleLogEntry alloc] init];
     // Convert string to date object
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
@@ -89,24 +88,24 @@ typedef NS_ENUM(NSUInteger, BookerErrorType) {
 
 @end
 
-@interface BookerErrorLog ()
-@property (nonatomic, strong) NSMutableArray *errorEntries;
-@property (nonatomic, strong) NSMutableArray *syncEntries;
-@property (nonatomic, strong) NSMutableArray *performanceEntries;
+@interface SimpleErrorLog ()
+@property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *errorEntries;
+@property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *syncEntries;
+@property (nonatomic, strong) NSMutableArray <SimpleLogEntry *> *performanceEntries;
 @end
 
-@implementation BookerErrorLog
+@implementation SimpleErrorLog
 
-static NSString *BOOKERUI_LogUpdated = @"BOOKERUI_LogUpdated";
+SimpleErrorLog *singleton = nil;
 
-BookerErrorLog *singleton = nil;
-
-+ (BookerErrorLog *) sharedErrorLog {
++ (SimpleErrorLog *) sharedErrorLog {
     if (singleton == nil) {
-        singleton = [[BookerErrorLog alloc] init];
+        singleton = [[SimpleErrorLog alloc] init];
         singleton.errorEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
         singleton.syncEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
         singleton.performanceEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
+        singleton.timeFormatter = [[NSDateFormatter alloc] init];
+        [singleton.timeFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
     }
     return singleton;
 }
@@ -121,9 +120,9 @@ BookerErrorLog *singleton = nil;
 - (void)updateErrosListForType:(BookerErrorType)type withArray:(NSMutableArray *)array
 {
     [array removeAllObjects];
-    NSArray *errorsList = [BookerErrorLog downloadHistoryWithType:type];
+    NSArray *errorsList = [SimpleErrorLog downloadHistoryWithType:type];
     for (NSString *element in errorsList) {
-        BookerLogEntry *entry = [BookerLogEntry bookerLogEntryFromString:element];
+        SimpleLogEntry *entry = [SimpleLogEntry bookerLogEntryFromString:element];
         if (!entry) {
             continue;
         }
@@ -148,27 +147,27 @@ BookerErrorLog *singleton = nil;
     return count;
 }
 
-- (BookerLogEntry *) performanceEntryAtIndex:(NSUInteger)index {
+- (SimpleLogEntry *) performanceEntryAtIndex:(NSUInteger)index {
     if (index < self.performanceEntries.count) {
-        BookerLogEntry *entry;
+        SimpleLogEntry *entry;
         entry = self.performanceEntries[index];
         return entry;
     }
     return nil;
 }
 
-- (BookerLogEntry *) errorEntryAtIndex:(NSUInteger)index {
+- (SimpleLogEntry *) errorEntryAtIndex:(NSUInteger)index {
     if (index < self.errorEntries.count) {
-        BookerLogEntry *entry;
+        SimpleLogEntry *entry;
         entry = self.errorEntries[index];
         return entry;
     }
     return nil;
 }
 
-- (BookerLogEntry *) syncEntryAtIndex:(NSUInteger)index {
+- (SimpleLogEntry *) syncEntryAtIndex:(NSUInteger)index {
     if (index < self.syncEntries.count) {
-        BookerLogEntry *entry;
+        SimpleLogEntry *entry;
         entry = self.syncEntries[index];
         return entry;
     }
@@ -186,16 +185,16 @@ BookerErrorLog *singleton = nil;
         if (range.location != NSNotFound) {
             method = [method substringFromIndex:range.location + range.length];
         }
-        BookerLogEntry *entry = [[BookerLogEntry alloc] init];
+        SimpleLogEntry *entry = [[SimpleLogEntry alloc] init];
         entry.time = [NSDate date];
         entry.method = method;
         entry.error = error;
         entry.latency = latency;
         entry.responseSize = error.userInfo[@"Size"];
-        [BookerErrorLog writeToHistoryFileBookerLogEntry:entry];
+        [SimpleErrorLog writeToHistoryFileBookerLogEntry:entry];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:BOOKERUI_LogUpdated
+        [[NSNotificationCenter defaultCenter] postNotificationName:SimpleLogUpdatedNotification
                                                             object:nil
                                                           userInfo:nil];
         
@@ -205,7 +204,7 @@ BookerErrorLog *singleton = nil;
 
 - (NSString *)getPerformanceMessage
 {
-    BookerErrorLog *log = [BookerErrorLog sharedErrorLog];
+    SimpleErrorLog *log = self;
     NSInteger count = log.performanceRecordCount;
     
     NSMutableString *result = [NSMutableString htmlTableRowWithParameters:nil contents:^NSString *(NSInteger column, NSMutableDictionary *cellParams) {
@@ -222,14 +221,13 @@ BookerErrorLog *singleton = nil;
                 return nil;
         }
     }];
-    BookerAPI *api = [BookerAPI globalBookerAPI];
     for (int i = 0; i < count; i++) {
-        BookerLogEntry *entry = [log performanceEntryAtIndex:i];
+        SimpleLogEntry *entry = [log performanceEntryAtIndex:i];
         [result appendString:[NSMutableString htmlTableRowWithParameters:nil contents:^NSString *(NSInteger column, NSMutableDictionary *cellParams) {
             switch (column) {
                 case 0:
                     if (entry.time) {
-                        return [api.location.locationDateFormatter stringFromDate:entry.time];
+                        return [log.timeFormatter stringFromDate:entry.time];
                     }
                     return @"-";
                 case 1:
@@ -263,7 +261,7 @@ BookerErrorLog *singleton = nil;
 
 - (NSString *)getSyncMessage
 {
-    BookerErrorLog *log = [BookerErrorLog sharedErrorLog];
+    SimpleErrorLog *log = self;
     NSInteger count = log.syncRecordCount;
     
     NSMutableString *result = [NSMutableString htmlTableRowWithParameters:nil contents:^NSString *(NSInteger column, NSMutableDictionary *cellParams) {
@@ -280,30 +278,21 @@ BookerErrorLog *singleton = nil;
                 return nil;
         }
     }];
-    BookerLocation *location = [BookerAPI globalBookerAPI].location;
     for (int i = 0; i < count; i++) {
-        BookerLogEntry *entry = [log syncEntryAtIndex:i];
+        SimpleLogEntry *entry = [log syncEntryAtIndex:i];
         NSString *fullDescription = entry.error.localizedDescription;
         NSArray *components = [fullDescription componentsSeparatedByString:@"·"];
         [result appendString:[NSMutableString htmlTableRowWithParameters:nil contents:^NSString *(NSInteger column, NSMutableDictionary *cellParams) {
             switch (column) {
                 case 0:
-                    return [NSString stringWithFormat:@"%@<br>%@", [location.locationDateFormatter stringFromDate:entry.time], entry.method.htmlString];
+                    return [NSString stringWithFormat:@"%@<br>%@", [log.timeFormatter stringFromDate:entry.time], entry.method.htmlString];
                 case 1:
                     if (components.count > 0) {
-                        NSRange promptRange = [components[0] rangeOfString:SYNCLOGPROMPT_FNB];
-                        if (promptRange.location != NSNotFound) {
-                            return [components[0] substringToIndex:promptRange.location].htmlString;
-                        }
                         return ((NSString *)components[0]).htmlString;
                     }
                     return @"";
                 case 2:
                     if (components.count > 1) {
-                        NSRange promptRange = [components[1] rangeOfString:SYNCLOGPROMPT_BOOKER];
-                        if (promptRange.location != NSNotFound) {
-                            return [components[1] substringToIndex:promptRange.location].htmlString;
-                        }
                         return ((NSString *)components[1]).htmlString;
                     }
                     return @"";
@@ -322,7 +311,7 @@ BookerErrorLog *singleton = nil;
 
 - (NSString *)getErrorsMessage
 {
-    BookerErrorLog *log = [BookerErrorLog sharedErrorLog];
+    SimpleErrorLog *log = self;
     NSInteger count = log.errorRecordCount;
     
     NSMutableString *result = [NSMutableString htmlTableRowWithParameters:nil contents:^NSString *(NSInteger column, NSMutableDictionary *cellParams) {
@@ -337,20 +326,19 @@ BookerErrorLog *singleton = nil;
                 return nil;
         }
     }];
-    BookerLocation *location = [BookerAPI globalBookerAPI].location;
     for (int i = 0; i < count; i++) {
-        BookerLogEntry *entry = [log errorEntryAtIndex:i];
+        SimpleLogEntry *entry = [log errorEntryAtIndex:i];
         [result appendString:[NSMutableString htmlTableRowWithParameters:nil contents:^NSString *(NSInteger column, NSMutableDictionary *cellParams) {
             switch (column) {
                 case 0:
-                    return [NSString stringWithFormat:@"%@", [location.locationDateFormatter stringFromDate:entry.time]];
+                    return [NSString stringWithFormat:@"%@", [log.timeFormatter stringFromDate:entry.time]];
                 case 1:
                     if (entry.method)
                         return entry.method.htmlString;
                     return @"";
                 case 2: {
-                    NSString *message = [entry.error.localizedDescription updateInternalErrorText];
-                    message = [NSString stringWithFormat:@"%@ (%d)", message, entry.error.code];
+                    NSString *message = entry.error.localizedDescription;
+                    message = [NSString stringWithFormat:@"%@ (%ld)", message, (long)entry.error.code];
                     return message.htmlString;
                 }
                 default:
@@ -382,11 +370,11 @@ BookerErrorLog *singleton = nil;
 
 #pragma mark - I/O logic for erros saving at file
 
-+ (void)writeToHistoryFileBookerLogEntry:(BookerLogEntry *)logEntry
++ (void)writeToHistoryFileBookerLogEntry:(SimpleLogEntry *)logEntry
 {
-    BookerErrorType type = (logEntry.error.code == BOOKERAPI_ERROR_CODE_PERFORMANCE_RECORD) ? BookerErrorPerformanceType:((logEntry.error.code == BOOKERAPI_ERROR_CODE_SYNC_RECORD) ? BookerErrorSyncType : BookerErrorEntryType);
+    BookerErrorType type = (logEntry.error.code == SIMPLELOG_ERROR_CODE_PERFORMANCE_RECORD) ? BookerErrorPerformanceType:((logEntry.error.code == SIMPLELOG_ERROR_CODE_SYNC_RECORD) ? BookerErrorSyncType : BookerErrorEntryType);
     
-    NSString *fileName = [BookerErrorLog pathForLogType:type];
+    NSString *fileName = [self pathForLogType:type];
     //create file if it doesn't exist
     if(![[NSFileManager defaultManager] fileExistsAtPath:fileName])
         [[NSFileManager defaultManager] createFileAtPath:fileName contents:nil attributes:nil];
@@ -400,7 +388,7 @@ BookerErrorLog *singleton = nil;
 
 + (NSArray *)downloadHistoryWithType:(BookerErrorType)type
 {
-    NSString *fileName = [BookerErrorLog pathForLogType:type];
+    NSString *fileName = [self pathForLogType:type];
     if(![[NSFileManager defaultManager] fileExistsAtPath:fileName])
     {
         return nil;
@@ -421,11 +409,11 @@ BookerErrorLog *singleton = nil;
 {
     switch (type) {
         case BookerErrorPerformanceType:
-            return [BookerErrorLog pathForLogFile:@"_performance"];
+            return [self pathForLogFile:@"_performance"];
         case BookerErrorSyncType:
-            return [BookerErrorLog pathForLogFile:@"_sync"];
+            return [self pathForLogFile:@"_sync"];
         default:
-            return [BookerErrorLog pathForLogFile:@"_entry"];
+            return [self pathForLogFile:@"_entry"];
     }
 }
 
@@ -447,7 +435,7 @@ BookerErrorLog *singleton = nil;
         }
     }
     
-    NSString *fileName = [NSString stringWithFormat:@"%@%@.txt", [BookerAPI globalBookerAPI].getUser.employeeID, type];
+    NSString *fileName = [NSString stringWithFormat:@"%@%@.txt", [[UIDevice currentDevice] identifierForVendor], type];
     
     return [folder stringByAppendingPathComponent:fileName];
 }
@@ -455,7 +443,7 @@ BookerErrorLog *singleton = nil;
 - (BOOL)tryRemoveHistoryEntryType:(BookerErrorType)type
 {
     
-    NSString *fileName = [BookerErrorLog pathForLogType:type];
+    NSString *fileName = [[self class] pathForLogType:type];
     
     //create file if it doesn't exist
     if([[NSFileManager defaultManager] fileExistsAtPath:fileName])
