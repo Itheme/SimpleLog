@@ -102,7 +102,7 @@
         }
         cell.dateTimeLabel.text = [self.timeFormatter stringFromDate:entry.time];
         cell.methodLabel.text = [entry.method isKindOfClass:[NSString class]]?entry.method : @"";
-        cell.textField.text = [NSString stringWithFormat:@"%@", entry.error.localizedDescription];
+        cell.textField.text = [[NSString stringWithFormat:@"%@", entry.error.localizedDescription] stringByReplacingOccurrencesOfString:@"·" withString:@"\n"];
         return cell;
     }
 }

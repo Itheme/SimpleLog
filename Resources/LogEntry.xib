@@ -20,7 +20,7 @@
                             <constraint firstAttribute="height" constant="21" id="X2h-KF-AUM"/>
                             <constraint firstAttribute="width" constant="76" id="iRs-HW-03g"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -30,7 +30,7 @@
                             <constraint firstAttribute="height" constant="21" id="L3h-dv-JNS"/>
                             <constraint firstAttribute="width" constant="127" id="a0P-jL-F6t"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wnp-jn-SoP">
