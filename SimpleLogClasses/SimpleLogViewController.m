@@ -4,11 +4,8 @@
 
 #import "SettingsLogViewController.h"
 #import "SimpleLog.h"
+#import "LogEntryViewCell.h"
 #import <MessageUI/MessageUI.h>
-
-@implementation LogEntryViewCell
-
-@end
 
 @interface SettingsLogViewController ()<MFMailComposeViewControllerDelegate>
 
@@ -54,7 +51,7 @@
 - (NSUInteger)recordCountForCurrentMode
 {
     switch (self.mode) {
-        case SettingsSyncLogMode:
+        case SettingsGenericLogMode:
             return [SimpleErrorLog sharedErrorLog].genericRecordCount;
         case SettingsPerformanceLogMode:
             return [SimpleErrorLog sharedErrorLog].performanceRecordCount;
@@ -78,15 +75,25 @@
     NSInteger c = [self recordCountForCurrentMode];
     if (c == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell"];
+        if (cell == nil) {
+            [tableView registerNib:[UINib nibWithNibName:@"EmptyLogEntry" bundle:nil]
+            forCellReuseIdentifier:@"EmptyCell"];
+            cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell"];
+        }
         return cell;
     } else {
         LogEntryViewCell *cell = (LogEntryViewCell *)[tableView dequeueReusableCellWithIdentifier:@"LogEntryCell"];
+        if (cell == nil) {
+            [tableView registerNib:[UINib nibWithNibName:@"LogEntry" bundle:nil]
+            forCellReuseIdentifier:@"LogEntryCell"];
+            cell = (LogEntryViewCell *)[tableView dequeueReusableCellWithIdentifier:@"LogEntryCell"];
+        }
         SimpleLogEntry *entry;
         switch (self.mode) {
             case SettingsPerformanceLogMode:
                 entry = [log performanceEntryAtIndex:indexPath.row];
                 break;
-            case SettingsSyncLogMode:
+            case SettingsGenericLogMode:
                 entry = [log genericEntryAtIndex:indexPath.row];
                 break;
             default:
@@ -110,7 +117,7 @@
             case SettingsPerformanceLogMode:
                 [self.picker setMessageBody:[[SimpleErrorLog sharedErrorLog] getPerformanceMessage] isHTML:YES];
                 break;
-            case SettingsSyncLogMode:
+            case SettingsGenericLogMode:
                 [self.picker setMessageBody:[[SimpleErrorLog sharedErrorLog] getGenericMessage] isHTML:YES];
                 break;
             default:
@@ -130,7 +137,7 @@
         case SettingsPerformanceLogMode:
             [[SimpleErrorLog sharedErrorLog] clearPerformance];
             break;
-        case SettingsSyncLogMode:
+        case SettingsGenericLogMode:
             [[SimpleErrorLog sharedErrorLog] clearGeneric];
             break;
         default:
