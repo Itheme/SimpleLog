@@ -1,0 +1,533 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		38539C5A1D08526D003B287E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C591D08526D003B287E /* main.m */; };
+		38539C5D1D08526D003B287E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C5C1D08526D003B287E /* AppDelegate.m */; };
+		38539C601D08526D003B287E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C5F1D08526D003B287E /* ViewController.m */; };
+		38539C631D08526D003B287E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38539C611D08526D003B287E /* Main.storyboard */; };
+		38539C651D08526D003B287E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38539C641D08526D003B287E /* Assets.xcassets */; };
+		38539C681D08526D003B287E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38539C661D08526D003B287E /* LaunchScreen.storyboard */; };
+		38539C731D08526D003B287E /* SimpleLogTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C721D08526D003B287E /* SimpleLogTests.m */; };
+		38539C7E1D08526D003B287E /* SimpleLogUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C7D1D08526D003B287E /* SimpleLogUITests.m */; };
+		38539C8E1D0852CE003B287E /* SimpleLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 38539C8D1D0852CE003B287E /* SimpleLog.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		38539C6F1D08526D003B287E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38539C4D1D08526C003B287E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38539C541D08526D003B287E;
+			remoteInfo = SimpleLog;
+		};
+		38539C7A1D08526D003B287E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38539C4D1D08526C003B287E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38539C541D08526D003B287E;
+			remoteInfo = SimpleLog;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		38539C551D08526D003B287E /* SimpleLog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleLog.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		38539C591D08526D003B287E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		38539C5B1D08526D003B287E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		38539C5C1D08526D003B287E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		38539C5E1D08526D003B287E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		38539C5F1D08526D003B287E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		38539C621D08526D003B287E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		38539C641D08526D003B287E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		38539C671D08526D003B287E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		38539C691D08526D003B287E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38539C6E1D08526D003B287E /* SimpleLogTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleLogTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38539C721D08526D003B287E /* SimpleLogTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleLogTests.m; sourceTree = "<group>"; };
+		38539C741D08526D003B287E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38539C791D08526D003B287E /* SimpleLogUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleLogUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		38539C7D1D08526D003B287E /* SimpleLogUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleLogUITests.m; sourceTree = "<group>"; };
+		38539C7F1D08526D003B287E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38539C8C1D0852CE003B287E /* SimpleLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleLog.h; sourceTree = "<group>"; };
+		38539C8D1D0852CE003B287E /* SimpleLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleLog.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		38539C521D08526D003B287E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38539C6B1D08526D003B287E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38539C761D08526D003B287E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		38539C4C1D08526C003B287E = {
+			isa = PBXGroup;
+			children = (
+				38539C8B1D0852CE003B287E /* SimpleLogClasses */,
+				38539C571D08526D003B287E /* SimpleLog */,
+				38539C711D08526D003B287E /* SimpleLogTests */,
+				38539C7C1D08526D003B287E /* SimpleLogUITests */,
+				38539C561D08526D003B287E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		38539C561D08526D003B287E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				38539C551D08526D003B287E /* SimpleLog.app */,
+				38539C6E1D08526D003B287E /* SimpleLogTests.xctest */,
+				38539C791D08526D003B287E /* SimpleLogUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		38539C571D08526D003B287E /* SimpleLog */ = {
+			isa = PBXGroup;
+			children = (
+				38539C5B1D08526D003B287E /* AppDelegate.h */,
+				38539C5C1D08526D003B287E /* AppDelegate.m */,
+				38539C5E1D08526D003B287E /* ViewController.h */,
+				38539C5F1D08526D003B287E /* ViewController.m */,
+				38539C611D08526D003B287E /* Main.storyboard */,
+				38539C641D08526D003B287E /* Assets.xcassets */,
+				38539C661D08526D003B287E /* LaunchScreen.storyboard */,
+				38539C691D08526D003B287E /* Info.plist */,
+				38539C581D08526D003B287E /* Supporting Files */,
+			);
+			path = SimpleLog;
+			sourceTree = "<group>";
+		};
+		38539C581D08526D003B287E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				38539C591D08526D003B287E /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		38539C711D08526D003B287E /* SimpleLogTests */ = {
+			isa = PBXGroup;
+			children = (
+				38539C721D08526D003B287E /* SimpleLogTests.m */,
+				38539C741D08526D003B287E /* Info.plist */,
+			);
+			path = SimpleLogTests;
+			sourceTree = "<group>";
+		};
+		38539C7C1D08526D003B287E /* SimpleLogUITests */ = {
+			isa = PBXGroup;
+			children = (
+				38539C7D1D08526D003B287E /* SimpleLogUITests.m */,
+				38539C7F1D08526D003B287E /* Info.plist */,
+			);
+			path = SimpleLogUITests;
+			sourceTree = "<group>";
+		};
+		38539C8B1D0852CE003B287E /* SimpleLogClasses */ = {
+			isa = PBXGroup;
+			children = (
+				38539C8C1D0852CE003B287E /* SimpleLog.h */,
+				38539C8D1D0852CE003B287E /* SimpleLog.m */,
+			);
+			path = SimpleLogClasses;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		38539C541D08526D003B287E /* SimpleLog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38539C821D08526D003B287E /* Build configuration list for PBXNativeTarget "SimpleLog" */;
+			buildPhases = (
+				38539C511D08526D003B287E /* Sources */,
+				38539C521D08526D003B287E /* Frameworks */,
+				38539C531D08526D003B287E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleLog;
+			productName = SimpleLog;
+			productReference = 38539C551D08526D003B287E /* SimpleLog.app */;
+			productType = "com.apple.product-type.application";
+		};
+		38539C6D1D08526D003B287E /* SimpleLogTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38539C851D08526D003B287E /* Build configuration list for PBXNativeTarget "SimpleLogTests" */;
+			buildPhases = (
+				38539C6A1D08526D003B287E /* Sources */,
+				38539C6B1D08526D003B287E /* Frameworks */,
+				38539C6C1D08526D003B287E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38539C701D08526D003B287E /* PBXTargetDependency */,
+			);
+			name = SimpleLogTests;
+			productName = SimpleLogTests;
+			productReference = 38539C6E1D08526D003B287E /* SimpleLogTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		38539C781D08526D003B287E /* SimpleLogUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38539C881D08526D003B287E /* Build configuration list for PBXNativeTarget "SimpleLogUITests" */;
+			buildPhases = (
+				38539C751D08526D003B287E /* Sources */,
+				38539C761D08526D003B287E /* Frameworks */,
+				38539C771D08526D003B287E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38539C7B1D08526D003B287E /* PBXTargetDependency */,
+			);
+			name = SimpleLogUITests;
+			productName = SimpleLogUITests;
+			productReference = 38539C791D08526D003B287E /* SimpleLogUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		38539C4D1D08526C003B287E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = Itheme;
+				TargetAttributes = {
+					38539C541D08526D003B287E = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					38539C6D1D08526D003B287E = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 38539C541D08526D003B287E;
+					};
+					38539C781D08526D003B287E = {
+						CreatedOnToolsVersion = 7.3.1;
+						TestTargetID = 38539C541D08526D003B287E;
+					};
+				};
+			};
+			buildConfigurationList = 38539C501D08526C003B287E /* Build configuration list for PBXProject "SimpleLog" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 38539C4C1D08526C003B287E;
+			productRefGroup = 38539C561D08526D003B287E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				38539C541D08526D003B287E /* SimpleLog */,
+				38539C6D1D08526D003B287E /* SimpleLogTests */,
+				38539C781D08526D003B287E /* SimpleLogUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		38539C531D08526D003B287E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38539C681D08526D003B287E /* LaunchScreen.storyboard in Resources */,
+				38539C651D08526D003B287E /* Assets.xcassets in Resources */,
+				38539C631D08526D003B287E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38539C6C1D08526D003B287E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38539C771D08526D003B287E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38539C511D08526D003B287E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38539C601D08526D003B287E /* ViewController.m in Sources */,
+				38539C5D1D08526D003B287E /* AppDelegate.m in Sources */,
+				38539C8E1D0852CE003B287E /* SimpleLog.m in Sources */,
+				38539C5A1D08526D003B287E /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38539C6A1D08526D003B287E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38539C731D08526D003B287E /* SimpleLogTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38539C751D08526D003B287E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38539C7E1D08526D003B287E /* SimpleLogUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		38539C701D08526D003B287E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38539C541D08526D003B287E /* SimpleLog */;
+			targetProxy = 38539C6F1D08526D003B287E /* PBXContainerItemProxy */;
+		};
+		38539C7B1D08526D003B287E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38539C541D08526D003B287E /* SimpleLog */;
+			targetProxy = 38539C7A1D08526D003B287E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		38539C611D08526D003B287E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38539C621D08526D003B287E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		38539C661D08526D003B287E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				38539C671D08526D003B287E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		38539C801D08526D003B287E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		38539C811D08526D003B287E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		38539C831D08526D003B287E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SimpleLog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.itheme.SimpleLog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		38539C841D08526D003B287E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SimpleLog/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.itheme.SimpleLog;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		38539C861D08526D003B287E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SimpleLogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.itheme.SimpleLogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleLog.app/SimpleLog";
+			};
+			name = Debug;
+		};
+		38539C871D08526D003B287E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SimpleLogTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.itheme.SimpleLogTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimpleLog.app/SimpleLog";
+			};
+			name = Release;
+		};
+		38539C891D08526D003B287E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SimpleLogUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.itheme.SimpleLogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SimpleLog;
+			};
+			name = Debug;
+		};
+		38539C8A1D08526D003B287E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SimpleLogUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.itheme.SimpleLogUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SimpleLog;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		38539C501D08526C003B287E /* Build configuration list for PBXProject "SimpleLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38539C801D08526D003B287E /* Debug */,
+				38539C811D08526D003B287E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38539C821D08526D003B287E /* Build configuration list for PBXNativeTarget "SimpleLog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38539C831D08526D003B287E /* Debug */,
+				38539C841D08526D003B287E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		38539C851D08526D003B287E /* Build configuration list for PBXNativeTarget "SimpleLogTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38539C861D08526D003B287E /* Debug */,
+				38539C871D08526D003B287E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		38539C881D08526D003B287E /* Build configuration list for PBXNativeTarget "SimpleLogUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38539C891D08526D003B287E /* Debug */,
+				38539C8A1D08526D003B287E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 38539C4D1D08526C003B287E /* Project object */;
+}
