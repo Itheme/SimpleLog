@@ -23,6 +23,11 @@ typedef NS_ENUM(NSUInteger, LogErrorType) {
 @property (nonatomic) NSNumber *responseSize;
 @end
 
+@interface LogCategoryMethod ()
+@property (nonatomic, strong) NSString *method;
+@property (nonatomic, weak) LogCategory *category;
+@end
+
 @interface LogCategory ()
 @property (nonatomic, strong) NSString *reason;
 @end
@@ -52,14 +57,16 @@ typedef NS_ENUM(NSUInteger, LogErrorType) {
                            @"size" : UNNIL(self.responseSize)};
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict
-                                                       options:NSJSONWritingPrettyPrinted // Pass 0 if you don't care about the readability of the generated string
+                                                       options:0
                                                          error:&error];
     if (! jsonData) {
         NSLog(@"Got an error: %@", error);
         return @"";
     } else {
-        NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-        return [jsonString stringByAppendingString:@":::"];
+        NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                     encoding:NSUTF8StringEncoding];
+        return [[jsonString stringByReplacingOccurrencesOfString:jsonBreakerString
+                                                      withString:@": : :"] stringByAppendingString:jsonBreakerString];
     }
 }
 
@@ -103,14 +110,20 @@ SimpleErrorLog *singleton = nil;
 + (SimpleErrorLog *) sharedErrorLog {
     if (singleton == nil) {
         singleton = [[SimpleErrorLog alloc] init];
-        singleton.errorEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
-        singleton.genericEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
-        singleton.performanceEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
-        singleton.categories = [NSMutableDictionary dictionary];
-        singleton.timeFormatter = [[NSDateFormatter alloc] init];
-        [singleton.timeFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
     }
     return singleton;
+}
+
+- (id) init {
+    if (self = [super init]) {
+        self.errorEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
+        self.genericEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
+        self.performanceEntries = [NSMutableArray arrayWithCapacity:LogCapacity];
+        self.categories = [NSMutableDictionary dictionary];
+        self.timeFormatter = [[NSDateFormatter alloc] init];
+        [self.timeFormatter setDateFormat:@"YYYY-MM-dd HH:mm:ss Z"];
+    }
+    return self;
 }
 
 - (LogCategory *)categoryWithReason:(NSString *)reason
@@ -458,7 +471,7 @@ SimpleErrorLog *singleton = nil;
         NSLog(@"Error %@ No such file %@", error.localizedDescription, fileName);
         return nil;
     }
-    NSArray *array = [content componentsSeparatedByString:@":::"];
+    NSArray *array = [content componentsSeparatedByString:jsonBreakerString];
     return array;
 }
 
@@ -515,7 +528,6 @@ SimpleErrorLog *singleton = nil;
     return YES;
 }
 
-
 @end
 
 @implementation LogCategory
@@ -526,6 +538,26 @@ SimpleErrorLog *singleton = nil;
                                        message:message
                                    description:description
                                      forMethod:method];
+}
+
+- (LogCategoryMethod *)method:(NSString *)method
+{
+    if (method == nil) {
+        return [self method:@""];
+    }
+    LogCategoryMethod *result = [[LogCategoryMethod alloc] init];
+    result.method = method;
+    result.category = self;
+    return result;
+}
+
+@end
+
+@implementation LogCategoryMethod
+
+- (void)logMessage:(NSString *)message description:(NSString *)description
+{
+    [self.category logMessage:message description:description forMethod:self.method];
 }
 
 @end

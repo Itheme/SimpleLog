@@ -1,8 +1,3 @@
-//
-//  NSString+HTMLStrings.m
-//  NativeiOSBooker
-//
-
 #import "NSString+HTMLStrings.h"
 
 @implementation NSString (HTMLStrings)

@@ -12,6 +12,7 @@
 #define UNNIL(A) (A)?(A):([NSNull null])
 #define LogCapacity 400
 static NSString *SimpleLogUpdatedNotification = @"SimpleLogUpdatedNotification";
+static NSString *jsonBreakerString = @":::";
 
 #define SIMPLELOG_ERROR_CODE_PERFORMANCE_RECORD -266537017
 #define SIMPLELOG_ERROR_CODE_GENERIC_RECORD -266537018

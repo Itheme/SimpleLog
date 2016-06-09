@@ -1,9 +1,5 @@
 //
 //  SimpleLog.h
-//  NativeiOSBooker
-//
-//  Created by Danila Parhomenko on 3/26/14.
-//  Copyright (c) 2014 Booker Software. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,7 +12,16 @@
 @property (nonatomic, readonly) NSNumber *responseSize;
 @end
 
+@interface LogCategoryMethod : NSObject
+
+- (void) logMessage:(NSString *)message description:(NSString *)description;
+
+@end
+
+
 @interface LogCategory : NSObject
+
+- (LogCategoryMethod *)method:(NSString *)method;
 
 - (void) logMessage:(NSString *)message description:(NSString *)description forMethod:(NSString *)method;
 

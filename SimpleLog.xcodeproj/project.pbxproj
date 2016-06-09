@@ -27,6 +27,7 @@
 		38539CB81D0875D0003B287E /* greenLogBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB31D0875D0003B287E /* greenLogBarBackground@2x.png */; };
 		38539CB91D0875D0003B287E /* HistogramView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB41D0875D0003B287E /* HistogramView.xib */; };
 		38539CBA1D0875D0003B287E /* LogEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB51D0875D0003B287E /* LogEntry.xib */; };
+		38E5FAC91D09E11700D759A4 /* LogEntryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5FAC81D09E11700D759A4 /* LogEntryTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,8 @@
 		38539CB31D0875D0003B287E /* greenLogBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "greenLogBarBackground@2x.png"; sourceTree = "<group>"; };
 		38539CB41D0875D0003B287E /* HistogramView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistogramView.xib; sourceTree = "<group>"; };
 		38539CB51D0875D0003B287E /* LogEntry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogEntry.xib; sourceTree = "<group>"; };
+		38E5FAC81D09E11700D759A4 /* LogEntryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogEntryTest.m; path = SimpleLogTests/LogEntryTest.m; sourceTree = SOURCE_ROOT; };
+		38E5FACA1D09E15700D759A4 /* TestableCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestableCategories.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +162,9 @@
 		38539C711D08526D003B287E /* SimpleLogTests */ = {
 			isa = PBXGroup;
 			children = (
+				38E5FACA1D09E15700D759A4 /* TestableCategories.h */,
 				38539C721D08526D003B287E /* SimpleLogTests.m */,
+				38E5FAC81D09E11700D759A4 /* LogEntryTest.m */,
 				38539C741D08526D003B287E /* Info.plist */,
 			);
 			path = SimpleLogTests;
@@ -361,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38539C731D08526D003B287E /* SimpleLogTests.m in Sources */,
+				38E5FAC91D09E11700D759A4 /* LogEntryTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
