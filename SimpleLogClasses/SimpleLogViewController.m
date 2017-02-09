@@ -73,10 +73,11 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SimpleErrorLog *log = [SimpleErrorLog sharedErrorLog];
     NSInteger c = [self recordCountForCurrentMode];
+    NSBundle *podBundle = [NSBundle bundleForClass:[SimpleLogViewController class]];//[[NSBundle bundleForClass:[SimpleLogViewController class]] pathForResource:@"SimpleLog" ofType:@"bundle"];
     if (c == 0) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell"];
         if (cell == nil) {
-            [tableView registerNib:[UINib nibWithNibName:@"EmptyLogEntry" bundle:nil]
+            [tableView registerNib:[UINib nibWithNibName:@"EmptyLogEntry" bundle:podBundle]
             forCellReuseIdentifier:@"EmptyCell"];
             cell = [tableView dequeueReusableCellWithIdentifier:@"EmptyCell"];
         }
@@ -84,7 +85,7 @@
     } else {
         LogEntryViewCell *cell = (LogEntryViewCell *)[tableView dequeueReusableCellWithIdentifier:@"LogEntryCell"];
         if (cell == nil) {
-            [tableView registerNib:[UINib nibWithNibName:@"LogEntry" bundle:nil]
+            [tableView registerNib:[UINib nibWithNibName:@"LogEntry" bundle:podBundle]
             forCellReuseIdentifier:@"LogEntryCell"];
             cell = (LogEntryViewCell *)[tableView dequeueReusableCellWithIdentifier:@"LogEntryCell"];
         }

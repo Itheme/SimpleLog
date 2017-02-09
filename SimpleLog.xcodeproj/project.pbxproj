@@ -28,6 +28,7 @@
 		38539CB91D0875D0003B287E /* HistogramView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB41D0875D0003B287E /* HistogramView.xib */; };
 		38539CBA1D0875D0003B287E /* LogEntry.xib in Resources */ = {isa = PBXBuildFile; fileRef = 38539CB51D0875D0003B287E /* LogEntry.xib */; };
 		38E5FAC91D09E11700D759A4 /* LogEntryTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5FAC81D09E11700D759A4 /* LogEntryTest.m */; };
+		38E5FACC1D0A366300D759A4 /* HTMLGenerationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 38E5FACB1D0A366300D759A4 /* HTMLGenerationTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		38539CB51D0875D0003B287E /* LogEntry.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LogEntry.xib; sourceTree = "<group>"; };
 		38E5FAC81D09E11700D759A4 /* LogEntryTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogEntryTest.m; path = SimpleLogTests/LogEntryTest.m; sourceTree = SOURCE_ROOT; };
 		38E5FACA1D09E15700D759A4 /* TestableCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestableCategories.h; sourceTree = "<group>"; };
+		38E5FACB1D0A366300D759A4 /* HTMLGenerationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HTMLGenerationTest.m; path = SimpleLogTests/HTMLGenerationTest.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				38539C931D0855CC003B287E /* NSString+HTMLStrings.h */,
 				38539C941D0855CC003B287E /* NSString+HTMLStrings.m */,
 				38539C8F1D0853BF003B287E /* SimpleLogPrimitives.h */,
+				38E5FACB1D0A366300D759A4 /* HTMLGenerationTest.m */,
 				38539C8C1D0852CE003B287E /* SimpleLog.h */,
 				38539C8D1D0852CE003B287E /* SimpleLog.m */,
 				38539CA91D087022003B287E /* LogEntryViewCell.h */,
@@ -365,6 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38E5FACC1D0A366300D759A4 /* HTMLGenerationTest.m in Sources */,
 				38539C731D08526D003B287E /* SimpleLogTests.m in Sources */,
 				38E5FAC91D09E11700D759A4 /* LogEntryTest.m in Sources */,
 			);
