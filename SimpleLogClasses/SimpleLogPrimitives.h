@@ -9,7 +9,7 @@
 #ifndef SimpleLogPrimitives_h
 #define SimpleLogPrimitives_h
 
-#define UNNIL(A) (A)?(A):([NSNull null])
+#define UNNIL(A) ((A) != nil)?(A):([NSNull null])
 #define LogCapacity 400
 static NSString *SimpleLogUpdatedNotification = @"SimpleLogUpdatedNotification";
 static NSString *jsonBreakerString = @":::";
